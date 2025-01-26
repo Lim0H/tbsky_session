@@ -1,14 +1,47 @@
 [tool.poetry]
-name = "ticket-search-session"
+name = "tbsky_session"
 version = "0.1.0"
 description = ""
 authors = ["Illia Bahlai <bahlai.illia@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.11"
+[tool.poetry.scripts]
+start = 'tbsky_session:main'
 
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.115.7"}
+orjson = "^3.10.15"
+sqlmodel = "^0.0.22"
+asyncpg = "^0.30.0"
+fastapi-restful = "^0.6.0"
+fastapi-cache2 = {extras = ["redis"], version = "^0.2.2"}
+tenacity = "^9.0.0"
+fastapi-sso = "^0.17.0"
+fake-useragent = "^2.0.3"
+pyjwt = "^2.10.1"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+typing-inspect = "^0.9.0"
+greenlet = "^3.1.1"
+dateparser = "^1.2.0"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.14.1"
+black = "^24.10.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+enable_incomplete_feature = ["NewGenericSyntax"]
+plugins = ['pydantic.mypy']
+check_untyped_defs = true
+
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
