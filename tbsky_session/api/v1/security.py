@@ -15,13 +15,11 @@ from tbsky_session.core import (
     create_refresh_token,
     decode_jwt_token,
 )
-from tbsky_session.schemas import UserCreate, UserLogin
+from tbsky_session.schemas import UserCreate, UserLogin, UserOut
 
 __all__ = ["security_router"]
 
-security_router = APIRouter(
-    prefix="/security", tags=["Auth", "Security", "Login", "Logout", "Refresh"]
-)
+security_router = APIRouter(prefix="/security", tags=["Auth"])
 
 
 class SecurityResource:
@@ -69,7 +67,6 @@ class PublickAuthResource(PublicResource, SecurityResource):
                 session=session,
             )
             self._set_response_cookie(response, new_user)
-            return new_user
 
     @security_router.post("/login")
     async def login_from_user(
