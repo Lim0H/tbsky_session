@@ -1,4 +1,4 @@
-from typing import Annotated, Optional
+from typing import Annotated
 
 from fastapi import APIRouter, Body, Cookie, Depends, HTTPException, Response
 from fastapi_restful.cbv import cbv
@@ -15,7 +15,7 @@ from tbsky_session.core import (
     create_refresh_token,
     decode_jwt_token,
 )
-from tbsky_session.schemas import UserCreate, UserLogin, UserOut
+from tbsky_session.schemas import UserCreate, UserLogin
 
 __all__ = ["security_router"]
 
@@ -117,6 +117,9 @@ class AuthResource(ProtectedResource, SecurityResource):
     ):
         await black_list_token_repository.add(
             BlackListToken(access_token=access_token, refresh_token=refresh_token)
+        )
+        await black_list_token_repository.add(
+            BlackListToken(access_token=refresh_token, refresh_token=refresh_token)
         )
         response.delete_cookie(key="access_token")
         response.delete_cookie(key="refresh_token")
