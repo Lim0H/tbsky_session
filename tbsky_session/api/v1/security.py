@@ -16,9 +16,11 @@ from tbsky_session.core import (
     decode_jwt_token,
 )
 from tbsky_session.schemas import UserCreate, UserLogin
+from tbsky_session.schemas.users import UserOut
 
-__all__ = ["security_router"]
+__all__ = ["security_router", "users_router"]
 
+users_router = APIRouter(prefix="/users", tags=["Users"])
 security_router = APIRouter(prefix="/security", tags=["Auth"])
 
 
@@ -124,3 +126,10 @@ class AuthResource(ProtectedResource, SecurityResource):
         response.delete_cookie(key="access_token")
         response.delete_cookie(key="refresh_token")
         return {"message": "Logout successful"}
+
+
+@cbv(users_router)
+class UsersResource(ProtectedResource):
+    @users_router.get("/me", response_model=UserOut)
+    async def get_me(self, user_repository: UserRepository = Depends()):
+        return self.user

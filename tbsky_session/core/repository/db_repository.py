@@ -1,7 +1,7 @@
 import logging
 from abc import ABC
 from contextlib import _AsyncGeneratorContextManager
-from typing import Any, Callable, Iterable, Optional, Type, TypeVar
+from typing import Callable, Iterable, Optional, Type, TypeVar
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import col, select
