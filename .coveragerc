@@ -1,0 +1,20 @@
+[report]
+exclude_also =
+    if TYPE_CHECKING
+    orjson.dumps
+    orjson.loads
+    def main
+    def to_async
+    self._set_response_cookie
+    def get_flight_path
+
+[run]
+omit =
+    tests/*
+    tbsky_session/schemas/users.py
+    tbsky_session/core/types/*
+    tbsky_session/core/service/resource.py
+    tbsky_session/core/logging.py
+    tbsky_session/api/__init__.py
+    tbsky_session/core/service/abc_service.py
+    tbsky_session/core/repository/abc_repository.py

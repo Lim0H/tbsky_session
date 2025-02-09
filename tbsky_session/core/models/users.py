@@ -2,7 +2,6 @@ from typing import Annotated
 
 from pydantic import EmailStr
 from pydantic import Field as PydanticField
-from pydantic import model_validator
 from pydantic.experimental.pipeline import validate_as
 from sqlmodel import Field
 
